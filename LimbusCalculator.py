@@ -194,7 +194,8 @@ def id_uptie_calculator():
 				shards += 30
 				total_shards += 30
 				print(f'{thread} Thread & {shards} egoshards are required for an {id_level} Identity to get to Uptie 4.')
-
+			else:
+				pass
 	elif id_rarity == 000:
 			if tier == 2:
 				thread = 0
@@ -214,6 +215,8 @@ def id_uptie_calculator():
 				shards += 50
 				total_shards += 50
 				print(f'{thread} Thread & {shards} egoshards are required for an {id_level} Identity to get to Uptie 4.')		
+			else:
+				pass
 	else:
 		pass
 
