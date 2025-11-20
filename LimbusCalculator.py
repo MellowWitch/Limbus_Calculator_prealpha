@@ -410,29 +410,3 @@ def menu_screen():
 print('WELCOME TO THE LIMBUS CALCULATOR!!!\nPlease Choose a menu option from below!')
 while True:
 	menu_screen()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# so far this has taken like 5-6ish hours
