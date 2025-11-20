@@ -159,7 +159,7 @@ def id_uptie_calculator():
 	global id_rarity
 	global tier
 
-	if id_rarity == 0:
+	if id_rarity == '0':
 		if tier == 4:
 			thread = 0
 			thread += 50
@@ -175,7 +175,7 @@ def id_uptie_calculator():
 		else:
 			pass
 
-	elif id_rarity == 00:
+	elif id_rarity == '00':
 			if tier == 2:
 				thread = 0
 				thread += 10
@@ -196,7 +196,7 @@ def id_uptie_calculator():
 				print(f'{thread} Thread & {shards} egoshards are required for an {id_level} Identity to get to Uptie 4.')
 			else:
 				pass
-	elif id_rarity == 000:
+	elif id_rarity == '000':
 			if tier == 2:
 				thread = 0
 				thread += 20
@@ -387,7 +387,7 @@ def menu_screen():
 		tier = int(input('Please choose what EGO Tier ya desire to Reach from 2, 3 or 4!'))
 		ego_uptie_calculator()
 	elif user_input == 2:
-		id_rarity = int(input(f"\nPlease choose your ID's Rarity from 0, 00 OR 000!!!\n>"))
+		id_rarity = input(f"\nPlease choose your ID's Rarity from 0, 00 OR 000!!!\n>")
 		tier = int(input(f"\nNow please choose your Desired Tier you wanna get from 2, 3 or 4!!!\n>"))
 		id_uptie_calculator()
 	elif user_input == 3:
