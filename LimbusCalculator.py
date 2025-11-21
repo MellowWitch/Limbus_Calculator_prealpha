@@ -927,7 +927,7 @@ def menu_screen():
 	elif user_input == 3:
 		id_level = int(input("What's your ID's level currently?\n>"))
 		wanted_id_level = int(input("What level do you want your ID to get to?\n>"))
-		exp_needed = total_exp[wanted_id_level] - total_exp[id_level] # EXP needed in Total to reach wanted_id_level 
+		exp_needed = total_exp[wanted_id_level-1] - total_exp[id_level] # EXP needed in Total to reach wanted_id_level 
 		user_input = int(input('Which EXP Lux tickets would you like to use?\n1. EXP Luxcavation I\n2. EXP Luxcavation II\n3. EXP Luxcavation III\n4. EXP Luxcavation IV\n>'))
 		exp_required_calculator()
 
