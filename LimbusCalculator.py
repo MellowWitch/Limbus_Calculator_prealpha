@@ -36,7 +36,7 @@ wanted_id_level = '' # Current max 55
 
 yes_no = ''
 user_input = '' 
-
+exp_mix_amount = 0
 
 exp_level_threshold = [0, 10, 12, 15, 20, 27, 40, 59, 88, 125, 168, 227, 298, 381, 482, 591, 728, 885, 1064, 1261, 1488, 1739, 2016, 2327, 2674, 3047, 3456, 3899, 4378, 4899, 3899, 4378, 4899, 5468, 6075, 4899, 5468, 6075, 6722, 7413, 6075, 6722, 7413, 8156, 8953, 7413, 7413, 7413, 7413, 7413, 8156, 8156, 8156, 8156, 8156] # Will be updated when new levels are added
 total_exp = [0, 10, 22, 37, 57, 84, 124, 183, 271, 396, 564, 791, 1089, 1470, 1952, 2543, 3271, 4156, 5220, 6481, 7969, 9708, 11724, 14051, 16725, 19772, 23228, 27127, 31505, 36404, 40303, 44681, 49580, 55048, 61123, 66022, 71490, 77565, 84287, 91700, 97775, 1004497, 111910, 120066, 129019, 136432, 143845, 151258, 158671, 166084, 174240, 182396, 190552, 198708, 206864] # Will be updated when new levels are added
@@ -383,8 +383,6 @@ def thread_shard_exp_total_subtract():
 			print('Please input either Yes or No.')
 			pass
 
-
-
 # Show how much Thread + Shards + EXP tickets are needed in Total
 def thread_shard_exp_total():
 	global total_thread
@@ -502,14 +500,14 @@ def exp_mix_tutorial():
 		id_level = int(input('First, Please set what your ID Level STARTS at.\n>'))
 	except ValueError:
 		print('Please input an Integer.')
-		pass
-	try:
-		wanted_id_level = int(input('Now set what Level you WANT your ID to reach.\n>'))
-	except ValueError:
-		print('Please input an Integer')
-		pass
-	exp_needed = total_exp[wanted_id_level-1] - total_exp[id_level-1]
-	print('For the Tutorial you will be Mixing EXP Luxcavation Tickets II & IV.')
+	else:
+		try:
+			wanted_id_level = int(input('Now set what Level you WANT your ID to reach.\n>'))
+		except ValueError:
+			print('Please input an Integer')
+		else:
+			exp_needed = total_exp[wanted_id_level-1] - total_exp[id_level-1]
+			print('For the Tutorial you will be Mixing EXP Luxcavation Tickets II & IV.')
 
 	while True:
 		try:
@@ -547,6 +545,501 @@ def exp_mix_tutorial():
 		pass
 	tutorial_check += 1
 
+
+def mix_fourth_choice():
+	pass
+
+
+def mix_third_choice():
+	pass
+
+
+def mix_second_choice():
+	global user_input
+	global exp_ticket1
+	global exp_ticket1_amount
+	global exp_ticket2
+	global exp_ticket2_amount
+	global exp_ticket3
+	global exp_ticket3_amount
+	global exp_ticket4
+	global exp_ticket4_amount
+	global exp_mix_amount
+	global excess_exp
+	global exp_needed
+
+	if user_input == 1: # First Choice EXP 1
+		while True:
+			try:
+				user_input = int(input("Please input which Ticket you'd like as your Second Choice from:\n1. EXP Luxcavation Ticket II\n2. EXP Luxcavation Ticket III\n3. EXP Luxcavation Ticket IV\n>"))
+			except ValueError:
+				print('Please input an Integer.')
+			else:
+				break
+
+		if user_input == 1:
+			while True:
+				try:
+					exp_ticket2_amount = int(input('How many EXP Luxcavation II Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket1_amount * exp_ticket1)+(exp_ticket2_amount * exp_ticket2)) # Calculation for 2 EXP Tickets
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket1_amount = excess_exp / exp_ticket1
+					exp_ticket2_amount = excess_exp / exp_ticket2
+					print(f"\nYou Could use either {exp_ticket1_amount} EXP Luxcavation I Tickets\nOR You could use {exp_ticket2_amount} EXP Luxcavation II Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+
+		elif user_input == 2: # For EXP Luxcavation Tickets III
+			while True:
+				try:
+					exp_ticket3_amount = int(input('How many EXP Luxcavation III Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket1_amount * exp_ticket1)+(exp_ticket3_amount * exp_ticket3))
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket1_amount = excess_exp / exp_ticket1
+					exp_ticket3_amount = excess_exp / exp_ticket3
+					print(f"\nYou Could use either {exp_ticket1_amount} EXP Luxcavation I Tickets\nOR You could use {exp_ticket3_amount} EXP Luxcavation III Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+
+
+
+		elif user_input == 3: # For EXP Luxcavation Tickets IV
+			while True:
+				try:
+					exp_ticket4_amount = int(input('How many EXP Luxcavation IV Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket1_amount * exp_ticket1)+(exp_ticket4_amount * exp_ticket4))
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket1_amount = excess_exp / exp_ticket1
+					exp_ticket4_amount = excess_exp / exp_ticket4
+					print(f"\nYou Could use either {exp_ticket1_amount} EXP Luxcavation I Tickets\nOR You could use {exp_ticket4_amount} EXP Luxcavation IV Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+
+		else:
+			pass
+
+
+
+	elif user_input == 2: # First Choice EXP 2
+		while True:
+			try:
+				user_input = int(input("Please input which Ticket you'd like as your Second Choice from:\n1. EXP Luxcavation Ticket I\n2. EXP Luxcavation Ticket III\n3. EXP Luxcavation Ticket IV\n>"))
+			except ValueError:
+				print('Please input an Integer.')
+			else:
+				break
+
+		if user_input == 1:
+			while True:
+				try:
+					exp_ticket1_amount = int(input('How many EXP Luxcavation I Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket2_amount * exp_ticket2)+(exp_ticket1_amount * exp_ticket1)) 
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket2_amount = excess_exp / exp_ticket2
+					exp_ticket1_amount = excess_exp / exp_ticket1
+					print(f"\nYou Could use either {exp_ticket1_amount} EXP Luxcavation I Tickets\nOR You could use {exp_ticket2_amount} EXP Luxcavation II Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+
+		elif user_input == 2: # For EXP Luxcavation Tickets III
+			while True:
+				try:
+					exp_ticket3_amount = int(input('How many EXP Luxcavation III Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket2_amount * exp_ticket2)+(exp_ticket3_amount * exp_ticket3))
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket2_amount = excess_exp / exp_ticket2
+					exp_ticket3_amount = excess_exp / exp_ticket3
+					print(f"\nYou Could use either {exp_ticket2_amount} EXP Luxcavation II Tickets\nOR You could use {exp_ticket3_amount} EXP Luxcavation III Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+		elif user_input == 3: # For EXP Luxcavation Tickets IV
+			while True:
+				try:
+					exp_ticket4_amount = int(input('How many EXP Luxcavation IV Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket2_amount * exp_ticket2)+(exp_ticket4_amount * exp_ticket4))
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket2_amount = excess_exp / exp_ticket2
+					exp_ticket4_amount = excess_exp / exp_ticket4
+					print(f"\nYou Could use either {exp_ticket2_amount} EXP Luxcavation II Tickets\nOR You could use {exp_ticket4_amount} EXP Luxcavation IV Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+
+		else:
+			pass
+
+	elif user_input == 3: # First Choice EXP 3
+		while True:
+			try:
+				user_input = int(input("Please input which Ticket you'd like as your Second Choice from:\n1. EXP Luxcavation Ticket I\n2. EXP Luxcavation Ticket II\n3. EXP Luxcavation Ticket IV\n>"))
+			except ValueError:
+				print('Please input an Integer.')
+			else:
+				break
+
+		if user_input == 1:
+			while True:
+				try:
+					exp_ticket1_amount = int(input('How many EXP Luxcavation I Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket3_amount * exp_ticket3)+(exp_ticket1_amount * exp_ticket1)) # Calculation for 2 EXP Tickets
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket1_amount = excess_exp / exp_ticket1
+					exp_ticket3_amount = excess_exp / exp_ticket3
+					print(f"\nYou Could use either {exp_ticket1_amount} EXP Luxcavation I Tickets\nOR You could use {exp_ticket3_amount} EXP Luxcavation III Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+		elif user_input == 2: # For EXP Luxcavation Tickets II
+			while True:
+				try:
+					exp_ticket2_amount = int(input('How many EXP Luxcavation II Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket3_amount * exp_ticket3)+(exp_ticket2_amount * exp_ticket2))
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket2_amount = excess_exp / exp_ticket2
+					exp_ticket3_amount = excess_exp / exp_ticket3
+					print(f"\nYou Could use either {exp_ticket2_amount} EXP Luxcavation II Tickets\nOR You could use {exp_ticket3_amount} EXP Luxcavation III Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+		elif user_input == 3: # For EXP Luxcavation Tickets IV
+			while True:
+				try:
+					exp_ticket4_amount = int(input('How many EXP Luxcavation IV Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket3_amount * exp_ticket3)+(exp_ticket4_amount * exp_ticket4))
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket3_amount = excess_exp / exp_ticket3
+					exp_ticket4_amount = excess_exp / exp_ticket4
+					print(f"\nYou Could use either {exp_ticket3_amount} EXP Luxcavation III Tickets\nOR You could use {exp_ticket4_amount} EXP Luxcavation IV Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+		else:
+			pass
+
+	elif user_input == 4: # First Choice EXP 4
+		while True:
+			try:
+				user_input = int(input("Please input which Ticket you'd like as your Second Choice from:\n1. EXP Luxcavation Ticket I\n2. EXP Luxcavation Ticket II\n3. EXP Luxcavation Ticket III\n>"))
+			except ValueError:
+				print('Please input an Integer.')
+			else:
+				break
+
+		if user_input == 1:
+			while True:
+				try:
+					exp_ticket1_amount = int(input('How many EXP Luxcavation I Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket1_amount * exp_ticket1)+(exp_ticket4_amount * exp_ticket4)) # Calculation for 2 EXP Tickets
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket1_amount = excess_exp / exp_ticket1
+					exp_ticket4_amount = excess_exp / exp_ticket4
+					print(f"\nYou Could use either {exp_ticket1_amount} EXP Luxcavation I Tickets\nOR You could use {exp_ticket4_amount} EXP Luxcavation IV Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+		elif user_input == 2: # For EXP Luxcavation Tickets II
+			while True:
+				try:
+					exp_ticket2_amount = int(input('How many EXP Luxcavation II Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket2_amount * exp_ticket2)+(exp_ticket4_amount * exp_ticket4))
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket2_amount = excess_exp / exp_ticket2
+					exp_ticket4_amount = excess_exp / exp_ticket4
+					print(f"\nYou Could use either {exp_ticket2_amount} EXP Luxcavation II Tickets\nOR You could use {exp_ticket4_amount} EXP Luxcavation IV Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+		elif user_input == 3: # For EXP Luxcavation Tickets IV
+			while True:
+				try:
+					exp_ticket3_amount = int(input('How many EXP Luxcavation III Tickets would you like?\n>'))
+				except ValueError:
+					print('Please input an Integer and Try again.')
+				else:
+					break
+			if exp_mix_amount == 2:
+				excess_exp = exp_needed - ((exp_ticket3_amount * exp_ticket3)+(exp_ticket4_amount * exp_ticket4))
+				if excess_exp < 0: 
+					print(f"You have an excess of {abs(excess_exp)} EXP!!!! That's WAYYYYYYYYYYYYYYY too much EXP! Ya don't need so much! Use less EXP tickets!!!")
+				elif excess_exp > 0:
+					print(f"You don't have enough EXP! Ya only have {excess_exp} left! To fix this you could...\n")
+					exp_ticket3_amount = excess_exp / exp_ticket3
+					exp_ticket4_amount = excess_exp / exp_ticket4
+					print(f"\nYou Could use either {exp_ticket3_amount} EXP Luxcavation III Tickets\nOR You could use {exp_ticket4_amount} EXP Luxcavation IV Tickets\nOR ya could use a mixture of both!")
+				elif excess_exp == 0:
+					print("Oh, well.. There's not much to say, that's exactly spot on. Good job. Neato. Cool, cool. HELL YEAH RAHHHHHHHHHHHHHHH")
+				else:
+					pass	
+
+			elif exp_mix_amount >= 3:
+				mix_third_choice()
+
+			else: 
+				print("I don't know how you got this Error.")
+				pass
+
+		else:
+			pass
+
+	else:
+		pass
+
+
+def mix_first_choice(): # This was the easiest part for these 4 choices :')
+	global user_input
+	global exp_ticket1_amount
+	global exp_ticket2_amount
+	global exp_ticket3_amount
+	global exp_ticket4_amount
+	global exp_mix_amount
+
+	if user_input == 1: 
+		print("You have chosen to use EXP Luxcavation Ticket I's as your first pick.")
+		while True:
+			try:
+				exp_ticket1_amount = int(input('How many EXP Luxcavation I Tickets would you like?\n>'))
+			except ValueError:
+				print('Please input an Integer and Try again.')
+			else:
+				break
+		if exp_mix_amount >= 2:
+			mix_second_choice()
+		else: 
+			print("I don't know how you got this Error.")
+			pass
+
+	elif user_input == 2:
+		print("You have chosen to use EXP Luxcavation Ticket II's as your first pick.")
+		while True:
+			try:
+				exp_ticket2_amount = int(input('How many EXP Luxcavation II Tickets would you like?\n>'))
+			except ValueError:
+				print('Please input an Integer and Try again.')
+			else:
+				break
+		if exp_mix_amount >= 2:
+			mix_second_choice()
+		else: 
+			print("I don't know how you got this Error.")
+			pass		
+
+	elif user_input == 3:
+		print("You have chosen to use EXP Luxcavation Ticket III's as your first pick.")
+		while True:
+			try:
+				exp_ticket3_amount = int(input('How many EXP Luxcavation III Tickets would you like?\n>'))
+			except ValueError:
+				print('Please input an Integer and Try again.')
+			else:
+				break
+		if exp_mix_amount >= 2:
+			mix_second_choice()
+		else: 
+			print("I don't know how you got this Error.")
+			pass
+
+	elif user_input == 4:
+		print("You have chosen to use EXP Luxcavation Ticket IV's as your first pick.")
+		while True:
+			try:
+				exp_ticket4_amount = int(input('How many EXP Luxcavation IV Tickets would you like?\n>'))
+			except ValueError:
+				print('Please input an Integer and Try again.')
+			else:
+				break
+		if exp_mix_amount >= 2:
+			mix_second_choice()
+		else: 
+			print("I don't know how you got this Error.")
+			pass
+
 # EXP Mixing, though this one sucks B.T.W.
 def mixing_exp_tickets():
 	global user_input
@@ -570,27 +1063,48 @@ def mixing_exp_tickets():
 	global exp_ticket3_total
 	global exp_ticket4_total
 	global yes_no
+	global exp_mix_amount
 
-	while True:
-		if tutorial_check == 0:
+
+	if tutorial_check > 0: # If the Value is above Zero, it always starts this ELIF statement, no matter what. I hope.
+		while True:
+			try:
+				exp_mix_amount = int(input('Would you like to Mix 2, 3, or 4 EXP Tickets?'))
+			except ValueError:
+				print('Please input an Integer.')
+			else:
+				if exp_mix_amount > 4:
+					print("You can only do 4, as there are only 4 EXP Ticket Types so far. Please try again.")
+					pass
+				elif 1 < exp_mix_amount <= 4:
+					while True:
+						try:
+							user_input = int(input("Please input which Ticket you'd like as your First Choice from:\n1. EXP Luxcavation Ticket I\n2. EXP Luxcavation Ticket II\n3. EXP Luxcavation Ticket III\n4. EXP Luxcavation Ticket IV\n>"))
+						except ValueError:
+							print('Please input an Integer.')
+						else:
+							break
+						mix_first_choice()
+				elif exp_mix_amount == 1:
+					print("why did you choose this if you didn't wanna mix tickets???? Go back to the Menu and Type 3 for the Levels one.")
+				else:
+					pass
+
+	elif tutorial_check == 0:
+		while True:
 			yes_no = input('Would you like to skip the Tutorial?').upper()
 			if yes_no == 'YES':
 				print('Very well, once you boot this Section up again, the Tutorial will not show.')
 				tutorial_check =+ 1
-				pass
+				break
 			elif yes_no == 'NO':
 				exp_mix_tutorial()
 			else:
+				print('Input Yes or No.')
 				pass
 
-		elif tutorial_check > 0: # If the Value is above Zero, it always starts this ELIF statement, no matter what. I hope.
-
-
-
-			break
-
-		else:
-			pass
+	else:
+		pass
 
 # Sharding an ID/EGO
 def sharding():
@@ -616,9 +1130,6 @@ def sharding():
 
 		else:
 			pass
-
-
-
 
 # MENU Screen
 def menu_screen():
@@ -657,14 +1168,7 @@ def menu_screen():
 		exp_required_calculator()
 
 	elif user_input == 4:
-		if message_delivered == 'NO':
-			print('Please note that this feature allows the Mixing of EXP Luxcavation Tickets to Reach a Certain Level. As this is in Development, it might have some errors, so apologies in advance.')
-			message_delivered = 'YES' # Makes it so the Message doesn't loop ever again during the programming.
-			mixing_exp_tickets()
-		elif message_delivered == 'YES':
-			mixing_exp_tickets()
-		else:
-			pass
+		mixing_exp_tickets()
 
 	elif user_input == 5:
 		sharding()
@@ -684,3 +1188,4 @@ def menu_screen():
 print('WELCOME TO THE LIMBUS CALCULATOR!!!\nPlease Choose a menu option from below!')
 while True:
 	menu_screen()
+
