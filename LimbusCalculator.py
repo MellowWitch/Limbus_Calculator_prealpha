@@ -158,8 +158,6 @@ def ego_uptie_calculator():
 		print('Invalid. Please Check that you typed it correctly.')
 		pass
 
-
-
 # ID UPTYING SORTING OUT
 def id_uptie_calculator():
 	global thread # I kinda hope someone reads this code tbh, likeee............. I dunno, I think it'd be nice. What Project Moon game is your favourite, viewer? (and why?)
@@ -236,7 +234,7 @@ def id_uptie_calculator():
 	else:
 		pass
 
-
+# The Subtraction method for the Totals
 def thread_shard_exp_total_subtract():
 	global user_input
 	global exp_ticket1_total
@@ -443,7 +441,7 @@ def thread_shard_exp_total():
 			print('Invalid. Please Input an Integer.')
 			pass
 
-
+# EXP Required Calculator
 def exp_required_calculator(): # I would like to say that I'm not in anyway a coding pro. please don't Judge TOO harshly :')
 	global exp_needed # this isn't good practice but like.......................I'm not a pro so yk, it is what it is
 	global total_exp
@@ -486,7 +484,7 @@ def exp_required_calculator(): # I would like to say that I'm not in anyway a co
 	else:
 		pass
 
-
+# The Tutorial for EXP Mixing
 def exp_mix_tutorial():
 	global id_level
 	global wanted_id_level
@@ -549,9 +547,7 @@ def exp_mix_tutorial():
 		pass
 	tutorial_check += 1
 
-
-
-
+# EXP Mixing, though this one sucks B.T.W.
 def mixing_exp_tickets():
 	global user_input
 	global id_level
@@ -596,7 +592,35 @@ def mixing_exp_tickets():
 		else:
 			pass
 
+# Sharding an ID/EGO
+def sharding():
+	global user_input
+	global total_shards
+	
+	try:
+		user_input = int(input('\nYou have chosen to Shard. Would you like to Shard:\n1.A 00 ID?\n2.A 000 ID?\n3.An EGO?\n>'))
+	except ValueError:
+		print('Error. Please choose an Integer next time.')
+	else:
+		if user_input == 1:
+			print('You have chosen to Shard a 00 ID, which adds 150 Egoshards to your Total Amount!')
+			total_shards += 150
 
+		elif user_input == 2:
+			print('You have chosen to Shard a 000 ID, which adds 400 Egoshards to your Total Amount!')
+			total_shards += 400
+
+		elif user_input == 3:
+			print('You have chosen to Shard an EGO, which adds 400 Egoshards to your Total Amount!')
+			total_shards += 400
+
+		else:
+			pass
+
+
+
+
+# MENU Screen
 def menu_screen():
 	global user_input # final global variable for now (nvm i lied)
 	global ego_tier
@@ -608,7 +632,7 @@ def menu_screen():
 	global id_rarity
 	global message_delivered
 
-	print('-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n1. Thread & Uptie for EGOs\n2. Thread & Uptie for IDs\n3. Levels for IDs\n4. Play around with Mixing Level Tickets!\n5. Total Shard, Thread & Total EXP Ticket Amount!\n6. Exit the Calculator\n-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-')
+	print('\n-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n1. Thread & Uptie for EGOs\n2. Thread & Uptie for IDs\n3. Levels for IDs\n4. Play around with Mixing Level Tickets!\n5. Sharding an ID/EGO\n6. Total Shard, Thread & Total EXP Ticket Amount!\n7. Exit the Calculator\n-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-')
 	try:
 		user_input = int(input('\n>'))
 	except ValueError:
@@ -643,42 +667,20 @@ def menu_screen():
 			pass
 
 	elif user_input == 5:
-		thread_shard_exp_total()
+		sharding()
 
 	elif user_input == 6:
+		thread_shard_exp_total()
+
+	elif user_input == 7:
 		print('Seeya! Love to All!')
 		exit()
 	else:
 		print('No additional choices yet!!!')
 		pass
-# 	exp_needed = total_exp[wanted_id_level - 1] - total_exp[id_level] # EXP needed in Total to reach wanted_id_level 
-#	user_input = int(input('Which EXP Lux tickets would you like to use?\n1. EXP Luxcavation I\n2. EXP Luxcavation II\n3. EXP Luxcavation III\n4. EXP Luxcavation IV\n5. Multiple\n>'))
+	# 	exp_needed = total_exp[wanted_id_level - 1] - total_exp[id_level] # EXP needed in Total to reach wanted_id_level 
+	#	user_input = int(input('Which EXP Lux tickets would you like to use?\n1. EXP Luxcavation I\n2. EXP Luxcavation II\n3. EXP Luxcavation III\n4. EXP Luxcavation IV\n5. Multiple\n>'))
 
 print('WELCOME TO THE LIMBUS CALCULATOR!!!\nPlease Choose a menu option from below!')
 while True:
 	menu_screen()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
