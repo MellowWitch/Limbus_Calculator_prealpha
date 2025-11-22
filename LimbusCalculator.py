@@ -1,5 +1,6 @@
 # Limbus Calculator for Uptying & Leveling
 import math
+from urllib.request import proxy_bypass
 # For math.ceil so things round up since you can't use a decimal of a Ticket
 
 tutorial_check = 0 # If this counter reaches 1, It will stop repeating the Tutorial. Works similarly to message_delivered, but this is for Functions
@@ -1779,8 +1780,38 @@ def menu_screen():
 		id_uptie_calculator()
 
 	elif user_input == 3:
-		id_level = int(input("What's your ID's level currently?\n>"))
-		wanted_id_level = int(input("What level do you want your ID to get to?\n>"))
+		while True:
+			while True:
+				try:
+					id_level = int(input("What's your ID's level currently?\n>"))
+				except ValueError:
+					print('Please input an integer.')
+					pass
+				else:
+					break
+			while True:
+				try:
+					wanted_id_level = int(input("What level do you want your ID to get to?\n>"))
+				except ValueError:
+					print('Please input an integer.')
+					pass
+				else:
+					break
+			if 1 <= id_level <= 55:
+				if 1 <= wanted_id_level <= 55:
+					break
+				elif wanted_id_level < 1:
+					print('Please input an actual Number for your Wanted ID level from 1-55.')
+				elif wanted_id_level > 55:
+					print('Please input an actual Number for your Wanted ID level from 1-55.')
+				else:
+					pass
+			elif id_level < 1:
+				print('Please input an actual Number for your ID level from 1-55.')
+			elif id_level > 55:
+				print('Please input an actual Number for your ID level from 1-55.')
+			else:
+				pass
 		exp_needed = total_exp[wanted_id_level-1] - total_exp[id_level] # EXP needed in Total to reach wanted_id_level 
 		user_input = int(input('Which EXP Lux tickets would you like to use?\n1. EXP Luxcavation I\n2. EXP Luxcavation II\n3. EXP Luxcavation III\n4. EXP Luxcavation IV\n>'))
 		exp_required_calculator()
@@ -1810,3 +1841,4 @@ def menu_screen():
 print('WELCOME TO THE LIMBUS CALCULATOR!!!\nPlease Choose a menu option from below!')
 while True:
 	menu_screen()
+
