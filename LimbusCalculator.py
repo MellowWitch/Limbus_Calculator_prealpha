@@ -706,10 +706,11 @@ def exp_mix_tutorial():
 		except ValueError:
 			print('Please input an Integer')
 			pass
-		if exp_ticket2_amount == int:
-			break
 		else:
-			pass
+			if exp_ticket2_amount == int:
+				break
+			else:
+				pass
 
 	while True:
 		try: 
@@ -717,10 +718,11 @@ def exp_mix_tutorial():
 		except ValueError:
 			print('Please input an Integer')
 			pass
-		if exp_ticket4_amount == int:
-			break
 		else:
-			pass
+			if exp_ticket2_amount == int:
+				break
+			else:
+				pass
 
 	excess_exp = exp_needed - ((exp_ticket4_amount * exp_ticket4)+(exp_ticket2_amount * exp_ticket2)) # Calculates how much EXP is left-over after the calculation. # abs() prevents it from being a negative number.
 	if excess_exp < 0: # If this value is Negative, it has gone overboard and there is an unnecessary amount of exp tickets use
@@ -2054,4 +2056,4 @@ while True:
 
 
 
-# so like, this project has taken like 15-16ish hours, cool.
+# so far this has taken like 15-16ish hours
