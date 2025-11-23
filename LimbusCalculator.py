@@ -158,10 +158,10 @@ def egoshard_check():
 				sinner_check -= 1
 				sinner_check_fn()
 				break
-			elif {sinner_check-1} > 11:
+			elif (sinner_check-1) > 11:
 				print('Please input a value from 1-11.')
 				pass
-			elif {sinner_check-1} < 0:
+			elif (sinner_check-1) < 0:
 				print('Please input a value from 1-11.')
 				pass
 			else:
