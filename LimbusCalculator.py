@@ -1,6 +1,5 @@
 # Limbus Calculator for Uptying & Leveling
 import math
-from urllib.request import proxy_bypass
 # For math.ceil so things round up since you can't use a decimal of a Ticket
 
 tutorial_check = 0 # If this counter reaches 1, It will stop repeating the Tutorial. Works similarly to message_delivered, but this is for Functions
@@ -44,12 +43,131 @@ exp_ticket2_check = 0
 exp_ticket3_check = 0
 exp_ticket4_check = 0
 
+sinner_check = 0 # I realised too late this needed its own variable, rip
+egoshards = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] # 0,11 (All sinners in order. )
+
+
 exp_level_threshold = [0, 10, 12, 15, 20, 27, 40, 59, 88, 125, 168, 227, 298, 381, 482, 591, 728, 885, 1064, 1261, 1488, 1739, 2016, 2327, 2674, 3047, 3456, 3899, 4378, 4899, 3899, 4378, 4899, 5468, 6075, 4899, 5468, 6075, 6722, 7413, 6075, 6722, 7413, 8156, 8953, 7413, 7413, 7413, 7413, 7413, 8156, 8156, 8156, 8156, 8156] # Will be updated when new levels are added
 total_exp = [0, 10, 22, 37, 57, 84, 124, 183, 271, 396, 564, 791, 1089, 1470, 1952, 2543, 3271, 4156, 5220, 6481, 7969, 9708, 11724, 14051, 16725, 19772, 23228, 27127, 31505, 36404, 40303, 44681, 49580, 55048, 61123, 66022, 71490, 77565, 84287, 91700, 97775, 1004497, 111910, 120066, 129019, 136432, 143845, 151258, 158671, 166084, 174240, 182396, 190552, 198708, 206864] # Will be updated when new levels are added
 id_level_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
 
 
 
+def sinner_check_simple(): # the simpler version which just says the sinner names.
+	global user_input
+	global sinner_check
+
+	if sinner_check == 0:
+		print('Yi Sang')
+
+	elif sinner_check == 1:
+		print('Faust')
+	
+	elif sinner_check == 2:
+		print('Don Quixote')
+
+	elif sinner_check == 3:
+		print('Ryoshu')
+
+	elif sinner_check == 4:
+		print('Meursault')
+
+	elif sinner_check == 5:
+		print('Hong Lu')
+
+	elif sinner_check == 6:
+		print('Heathcliff')
+
+	elif sinner_check == 7:
+		print('Ishmael')
+
+	elif sinner_check == 8:
+		print('Rodion')
+
+	elif sinner_check == 9:
+		print('Sinclair')
+
+	elif sinner_check == 10:
+		print('Outis')
+
+	elif sinner_check == 11:
+		print('Gregor')
+
+	else:
+		pass
+
+
+# simplifies the checking progress. I didn't wanna make an extra big function again, this is just easier.
+def sinner_check_fn(): # the fn is added to make sure i can differentiate the Variable and the Function, fn = function
+	global user_input
+	global sinner_check
+
+	if sinner_check == 0:
+		print('You have chosen Sinner no. 1 - Yi Sang! How Ideal!')
+
+	elif sinner_check == 1:
+		print('You have chosen Sinner no. 2 - Faust! How Intelligent!')
+	
+	elif sinner_check == 2:
+		print('You have chosen Sinner no. 3 - Don Quixote! How Ingenious!')
+
+	elif sinner_check == 3:
+		print('You have chosen Sinner no. 4 - Ryoshu! H.A. (How. Artistic.)')
+
+	elif sinner_check == 4:
+		print('You have chosen Sinner no. 5 - Meursault! How French!')
+
+	elif sinner_check == 5:
+		print('You have chosen Sinner no. 6 - Hong Lu! How Sightful! (its hard making puns)')
+
+	elif sinner_check == 6:
+		print('You have chosen Sinner no. 7 - Heathcliff! How Wild!')
+
+	elif sinner_check == 7:
+		print('You have chosen Sinner no. 8 - Ishmael! How Queer!')
+
+	elif sinner_check == 8:
+		print('You have chosen Sinner no. 9 - Rodion! How Lucky!')
+
+	elif sinner_check == 9:
+		print('You have chosen Sinner no. 10 - Sinclair! How Chicken!')
+
+	elif sinner_check == 10:
+		print('You have chosen Sinner no. 11 - Outis! How Old!')
+
+	elif sinner_check == 11:
+		print('You have chosen Sinner no. 13 - Gregor! Lung Cancer lmao')
+
+	else:
+		pass
+
+
+# To check who the Egoshards belong to.
+def egoshard_check():
+	global user_input
+	global egoshards
+	global sinner_check
+
+	while True:
+		try:
+			sinner_check = int(input('Please input which Sinner this is for from:\n1. Yi Sang\n2. Faust\n3. Don Quixote\n4. Ryoshu\n5. Meursault\n6. Hong Lu\n7. Heathcliff\n8. Ishmael\n9. Ryoshu\n10. Sinclair\n11. Outis\n12. Gregor\n>'))
+		except ValueError:
+			print('Please input a Valid Integer.')
+			pass
+		else:
+			if 0 <= (sinner_check-1) <= 11: # Ensures that the values cannot go above or below the Tuple's limits.
+				sinner_check -= 1
+				sinner_check_fn()
+				break
+			elif {sinner_check-1} > 11:
+				print('Please input a value from 1-11.')
+				pass
+			elif {sinner_check-1} < 0:
+				print('Please input a value from 1-11.')
+				pass
+			else:
+				print("I have no clue what you could've possibly done for this error.")
+				pass # To check which Sinner the egoshards are for.
 
 # EGO UPTYING SORTING OUT
 def ego_uptie_calculator():
@@ -59,6 +177,8 @@ def ego_uptie_calculator():
 	global thread
 	global ego_tier
 	global tier
+	global sinner_check
+	global egoshards
 
 
 	if ego_tier == 'ZAYIN':
@@ -73,13 +193,14 @@ def ego_uptie_calculator():
 			total_thread += 60
 			print(f'{thread} Thread is required for a {ego_tier} EGO to get to Uptie 3.')
 		elif tier == 4:
+			egoshard_check()
 			thread = 0
 			thread += 110
 			total_thread += 110
-			shards = 0
-			shards += 80
+			egoshards[sinner_check] = 0
+			egoshards[sinner_check] += 80
 			total_shards += 80
-			print(f'{thread} Thread & {shards} egoshards are required for a {ego_tier} EGO to get to Uptie 4.')
+			print(f'{thread} Thread & {egoshards[sinner_check]} {sinner_check_simple()} Egoshards are required for a {ego_tier} EGO to get to Uptie 4.')
 		elif tier > 4:
 			print("Tier V EGOs haven't released yet!!!!!! Head! Execute this fool!")
 		else:
@@ -97,13 +218,14 @@ def ego_uptie_calculator():
 			total_thread += 70
 			print(f'{thread} Thread is required for a {ego_tier} EGO to get to Uptie 3.')
 		elif tier == 4:
+			egoshard_check()
 			thread = 0
 			thread += 130
 			total_thread += 130
-			shards = 0
-			shards += 90
+			egoshards[sinner_check] = 0
+			egoshards[sinner_check] += 90
 			total_shards += 90
-			print(f'{thread} Thread & {shards} egoshards are required for a {ego_tier} EGO to get to Uptie 4.')
+			print(f'{thread} Thread & {egoshards[sinner_check]} {sinner_check_simple()} Egoshards are required for a {ego_tier} EGO to get to Uptie 4.')
 		elif tier > 4:
 			print("Tier V EGOs haven't released yet!!!!!! Head! Execute this fool!")
 		else:
@@ -122,13 +244,14 @@ def ego_uptie_calculator():
 			total_thread += 80
 			print(f'{thread} Thread is required for a {ego_tier} EGO to get to Uptie 3.')
 		elif tier == 4:
+			egoshard_check()
 			thread = 0
 			thread += 150
 			total_thread += 150
-			shards = 0
-			shards += 100
+			egoshards[sinner_check] = 0
+			egoshards[sinner_check] += 100
 			total_shards += 100
-			print(f'{thread} Thread & {shards} egoshards are required for a {ego_tier} EGO to get to Uptie 4.')
+			print(f'{thread} Thread & {egoshards[sinner_check]} {sinner_check_simple()} Egoshards are required for a {ego_tier} EGO to get to Uptie 4.')
 		elif tier > 4:
 			print("Tier V EGOs haven't released yet!!!!!! Head! Execute this fool!")
 		else:
@@ -145,13 +268,14 @@ def ego_uptie_calculator():
 			thread += 90
 			print(f'{thread} Thread is required for a {ego_tier} EGO to get to Uptie 3.')
 		elif tier == 4:
+			egoshard_check()
 			thread = 0
 			thread += 170
 			total_thread += 170
-			shards = 0
-			shards += 150
+			egoshards[sinner_check] = 0
+			egoshards[sinner_check] += 150
 			total_shards += 150
-			print(f'{thread} Thread & {shards} egoshards are required for a {ego_tier} EGO to get to Uptie 4.')
+			print(f'{thread} Thread & {egoshards[sinner_check]} {sinner_check_simple()} Egoshards are required for a {ego_tier} EGO to get to Uptie 4.')
 		elif tier > 4:
 			print("Tier V EGOs haven't released yet!!!!!! Head! Execute this fool!")
 		else:
@@ -175,14 +299,15 @@ def id_uptie_calculator():
 	global tier
 
 	if id_rarity == '0':
+		egoshard_check()
 		if tier == 4:
 			thread = 0
 			thread += 50
 			total_thread += 50
-			shards = 0
-			shards += 20
+			egoshards[sinner_check] = 0
+			egoshards[sinner_check] += 20
 			total_shards += 20
-			print(f'{thread} Thread & {shards} egoshards are required for an {id_level} Identity to get to Uptie 4.')
+			print(f'{thread} Thread & {egoshards[sinner_check]} {sinner_check_simple()} Egoshards are required for an {id_level} Identity to get to Uptie 4.')
 		elif tier < 4:
 			print('Cmon.. Just play the game..They get to uptie 3 automatically...')
 		elif tier > 4:
@@ -191,54 +316,99 @@ def id_uptie_calculator():
 			pass
 
 	elif id_rarity == '00':
-			if tier == 2:
-				thread = 0
-				thread += 10
-				total_thread += 10
-				print(f'{thread} Thread is required for an {id_level} Identity to get to Uptie 2.')
-			elif tier == 3:
-				thread = 0
-				thread += 40
-				total_thread += 40
-				print(f'{thread} Thread is required for an {id_level} Identity to get to Uptie 3.')
-			elif tier == 4:
-				thread = 0
-				thread += 100
-				total_thread += 100
-				shards = 0
-				shards += 30
-				total_shards += 30
-				print(f'{thread} Thread & {shards} egoshards are required for an {id_level} Identity to get to Uptie 4.')
-			elif tier > 4:
-				print("So far, there's no Tier V for IDs confirmed, but I'm hopin!!! :'D one day . . .")
-			else:
-				pass
+		egoshard_check()
+		if tier == 2:
+			thread = 0
+			thread += 10
+			total_thread += 10
+			print(f'{thread} Thread is required for an {id_level} Identity to get to Uptie 2.')
+		elif tier == 3:
+			thread = 0
+			thread += 40
+			total_thread += 40
+			print(f'{thread} Thread is required for an {id_level} Identity to get to Uptie 3.')
+		elif tier == 4:
+			thread = 0
+			thread += 100
+			total_thread += 100
+			egoshards[sinner_check] = 0
+			egoshards[sinner_check] += 30
+			total_shards += 30
+			print(f'{thread} Thread & {egoshards[sinner_check]} {sinner_check_simple()} Egoshards are required for an {id_level} Identity to get to Uptie 4.')
+		elif tier > 4:
+			print("So far, there's no Tier V for IDs confirmed, but I'm hopin!!! :'D one day . . .")
+		else:
+			pass
 
 	elif id_rarity == '000':
-			if tier == 2:
-				thread = 0
-				thread += 20
-				total_thread += 20
-				print(f'{thread} Thread is required for an {id_level} Identity to get to Uptie 2.')
-			elif tier == 3:
-				thread = 0
-				thread += 80
-				total_thread += 80
-				print(f'{thread} Thread is required for an {id_level} Identity to get to Uptie 3.')
-			elif tier == 4:
-				thread = 0
-				thread += 150
-				total_thread += 150
-				shards = 0
-				shards += 50
-				total_shards += 50
-				print(f'{thread} Thread & {shards} egoshards are required for an {id_level} Identity to get to Uptie 4.')		
-			elif tier > 4:
-				print("So far, there's no Tier V for IDs confirmed, but I'm hopin!!! :'D one day . . .")
-			else:
-				pass
+		egoshard_check()
+		if tier == 2:
+			thread = 0
+			thread += 20
+			total_thread += 20
+			print(f'{thread} Thread is required for an {id_level} Identity to get to Uptie 2.')
+		elif tier == 3:
+			thread = 0
+			thread += 80
+			total_thread += 80
+			print(f'{thread} Thread is required for an {id_level} Identity to get to Uptie 3.')
+		elif tier == 4:
+			thread = 0
+			thread += 150
+			total_thread += 150
+			egoshards[sinner_check] = 0
+			egoshards[sinner_check] += 50
+			total_shards += 50
+			print(f'{thread} Thread & {egoshards[sinner_check]} {sinner_check_simple()} Egoshards are required for an {id_level} Identity to get to Uptie 4.')		
+		elif tier > 4:
+			print("So far, there's no Tier V for IDs confirmed, but I'm hopin!!! :'D one day . . .")
+		else:
+			pass
 	else:
 		pass
+
+# Made this into a separate function so it doesn't become too complex.
+def total_egoshard_subtract():
+	global yes_no
+	global egoshards
+	global sinner_check
+	global user_input
+	global total_shards
+
+	while True:
+		yes_no = input('Would you like to remove any Shards?\n>').upper() # Egoshards
+		if yes_no == 'YES':
+			egoshard_check()
+			if 0 <= sinner_check <= 11:
+				try:
+					user_input = int(input(f'How many {sinner_check_simple()} Shards do you want to remove?\n>'))
+				except ValueError:
+					print('Please input an Integer.')
+					pass
+				else:
+					if egoshards[sinner_check] - user_input > 0 or egoshards[sinner_check] - user_input == 0:
+						total_shards = total_shards - user_input
+						egoshards[sinner_check] = egoshards[sinner_check] - user_input
+						print(f'You now have {egoshards[sinner_check]} {sinner_check_simple()} Shards.')
+						total_egoshard_subtract()
+					elif egoshards[sinner_check] - user_input < 0:
+						print('You cannot remove more Egoshards than you currently have in the Total, sorry; Try Again.')
+						pass
+					else:
+						pass
+			elif sinner_check > 11:
+				print('Error. Invalid Number for the Sinner.')
+				pass
+			elif sinner_check < 0:
+				print('Error. Invalid number for the Sinner.')
+				pass
+			else:
+				pass
+		elif yes_no == 'NO':
+			break
+		else:
+			print('Please input either Yes or No.')
+			pass
 
 # The Subtraction method for the Totals
 def thread_shard_exp_total_subtract():
@@ -250,6 +420,8 @@ def thread_shard_exp_total_subtract():
 	global total_thread
 	global total_shards
 	global yes_no
+	global egoshards
+	global sinner_check
 
 	while True:
 		yes_no = input('Would you like to remove some EXP Luxcavation I Tickets?\n>').upper() # EXP Luxcavation I
@@ -353,7 +525,7 @@ def thread_shard_exp_total_subtract():
 				pass
 			if total_thread - user_input > 0 or total_thread - user_input == 0:
 				total_thread = total_thread - user_input
-				print(f'You now have {total_thread} EXP Luxcavation II Tickets.')
+				print(f'You now have {total_thread} Thread.')
 				break
 			elif total_thread - user_input < 0:
 				print('You cannot remove more Thread than you currently have in the Total, sorry; Try Again.')
@@ -366,28 +538,8 @@ def thread_shard_exp_total_subtract():
 			print('Please input either Yes or No.')
 			pass
 
-	while True:
-		yes_no = input('Would you like to remove some Shards?\n>').upper() # Egoshards
-		if yes_no == 'YES':
-			try:
-				user_input = int(input('How many Egoshards do you want to remove?\n>'))
-			except ValueError:
-				print('Please input an Integer.')
-				pass
-			if total_shards - user_input > 0 or total_shards - user_input == 0:
-				total_shards = total_shards - user_input
-				print(f'You now have {total_shards} EXP Luxcavation II Tickets.')
-				break
-			elif total_shards - user_input < 0:
-				print('You cannot remove more Egoshards than you currently have in the Total, sorry; Try Again.')
-				pass
-			else:
-				pass
-		elif yes_no == 'NO':
-			break
-		else:
-			print('Please input either Yes or No.')
-			pass
+	total_egoshard_subtract()
+
 
 # Show how much Thread + Shards + EXP tickets are needed in Total
 def thread_shard_exp_total():
@@ -397,10 +549,25 @@ def thread_shard_exp_total():
 	global exp_ticket2_total
 	global exp_ticket3_total
 	global exp_ticket4_total
+	global egoshards
+	global sinner_check
 	global user_input
 
 	print('\nFor Thread & Egoshards you Require: ')
-	print(f'{total_shards} Egoshards & {total_thread} Thread!')
+	print(f'{total_shards} Total Egoshards & {total_thread} Thread!')
+	print(f'{egoshards[0]} Yi Sang Egoshards')
+	print(f'{egoshards[1]} Faust Egoshards')
+	print(f'{egoshards[2]} Don Quixote Egoshards')
+	print(f'{egoshards[3]} Ryoshu Egoshards')
+	print(f'{egoshards[4]} Meursault Egoshards')
+	print(f'{egoshards[5]} Hong Lu Egoshards')
+	print(f'{egoshards[6]} Heathcliff Egoshards')
+	print(f'{egoshards[7]} Ishmael Egoshards')
+	print(f'{egoshards[8]} Rodion Egoshards')
+	print(f'{egoshards[9]} Sinclair Egoshards')
+	print(f'{egoshards[10]} Outis Egoshards')
+	print(f'{egoshards[11]} Gregor Egoshards')
+
 	print('\nFor Experience Tickets, you Need: ')
 	print(f'{exp_ticket1_total} EXP Luxcavation I Tickets!')
 	print(f'{exp_ticket2_total} EXP Luxcavation II Tickets!!')
@@ -420,7 +587,20 @@ def thread_shard_exp_total():
 
 		elif user_input == 3:
 			print('\nFor Thread & Egoshards you Require: ')
-			print(f'{total_shards} Egoshards & {total_thread} Thread!')
+			print(f'{total_shards} Total Egoshards & {total_thread} Thread!')
+			print(f'{egoshards[0]} Yi Sang Egoshards')
+			print(f'{egoshards[1]} Faust Egoshards')
+			print(f'{egoshards[2]} Don Quixote Egoshards')
+			print(f'{egoshards[3]} Ryoshu Egoshards')
+			print(f'{egoshards[4]} Meursault Egoshards')
+			print(f'{egoshards[5]} Hong Lu Egoshards')
+			print(f'{egoshards[6]} Heathcliff Egoshards')
+			print(f'{egoshards[7]} Ishmael Egoshards')
+			print(f'{egoshards[8]} Rodion Egoshards')
+			print(f'{egoshards[9]} Sinclair Egoshards')
+			print(f'{egoshards[10]} Outis Egoshards')
+			print(f'{egoshards[11]} Gregor Egoshards')
+
 			print('\nFor Experience Tickets, you Need: ')
 			print(f'{exp_ticket1_total} EXP Luxcavation I Tickets!')
 			print(f'{exp_ticket2_total} EXP Luxcavation II Tickets!!')
@@ -439,6 +619,7 @@ def thread_shard_exp_total():
 			exp_ticket2_total = 0
 			exp_ticket3_total = 0
 			exp_ticket4_total = 0
+			egoshards = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			break
 
 		else:
@@ -1729,22 +1910,28 @@ def mixing_exp_tickets():
 def sharding():
 	global user_input
 	global total_shards
+	global egoshards
+	global sinner_check
 	
 	try:
 		user_input = int(input('\nYou have chosen to Shard. Would you like to Shard:\n1.A 00 ID?\n2.A 000 ID?\n3.An EGO?\n>'))
 	except ValueError:
 		print('Error. Please choose an Integer next time.')
 	else:
+		egoshard_check()
 		if user_input == 1:
-			print('You have chosen to Shard a 00 ID, which adds 150 Egoshards to your Total Amount!')
+			print(f'You have chosen to Shard a 00 ID for {sinner_check_simple()}, which adds 150 Egoshards to your Total Amount!')
+			egoshards[sinner_check] += 150
 			total_shards += 150
 
 		elif user_input == 2:
-			print('You have chosen to Shard a 000 ID, which adds 400 Egoshards to your Total Amount!')
+			print(f'You have chosen to Shard a 000 ID for {sinner_check_simple()}, which adds 400 Egoshards to your Total Amount!')
+			egoshards[sinner_check] += 400
 			total_shards += 400
 
 		elif user_input == 3:
-			print('You have chosen to Shard an EGO, which adds 400 Egoshards to your Total Amount!')
+			print(f'You have chosen to Shard an EGO for {sinner_check_simple()}, which adds 400 Egoshards to your Total Amount!')
+			egoshards[sinner_check] += 400
 			total_shards += 400
 
 		else:
@@ -1838,7 +2025,33 @@ def menu_screen():
 	# 	exp_needed = total_exp[wanted_id_level - 1] - total_exp[id_level] # EXP needed in Total to reach wanted_id_level 
 	#	user_input = int(input('Which EXP Lux tickets would you like to use?\n1. EXP Luxcavation I\n2. EXP Luxcavation II\n3. EXP Luxcavation III\n4. EXP Luxcavation IV\n5. Multiple\n>'))
 
+
 print('WELCOME TO THE LIMBUS CALCULATOR!!!\nPlease Choose a menu option from below!')
 while True:
 	menu_screen()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# so far this has taken like 15-16ish hours
